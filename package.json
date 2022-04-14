@@ -1,0 +1,28 @@
+{
+  "name": "quickpark-backend",
+  "version": "1.0.0",
+  "description": "development and conception of a smart parking system backend application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IoT-Projects-ENSIAS/QuickPark-backend.git"
+  },
+  "author": "Soumya Kaddouri, Mohamed Oudoun, Oussama Ennachite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IoT-Projects-ENSIAS/QuickPark-backend/issues"
+  },
+  "homepage": "https://github.com/IoT-Projects-ENSIAS/QuickPark-backend#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "firebase": "^9.6.10",
+    "firebase-admin": "^10.0.2",
+    "nodemon": "^2.0.15"
+  }
+}
