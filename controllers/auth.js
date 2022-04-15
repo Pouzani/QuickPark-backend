@@ -1,5 +1,5 @@
-const {getAuth} = require("firebase-admin/auth");
-const {admin} = require('../helpers/admin');
+const { getAuth } = require("firebase-admin/auth");
+const { admin } = require('../helpers/admin');
 exports.register = async(req,res,next) =>{
     try {
         const user = await getAuth().createUser({
