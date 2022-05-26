@@ -5,6 +5,7 @@ const morgan = require("morgan");
 require("colors");
 
 const auth = require('./routes/auth');
+const parkings = require('./routes/parkings');
 const { errorHandler,endPointNotFound} = require('./middlewares/errorHandler');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/auth',auth);
+app.use('/api/v1/parkings',parkings);
 app.use('*',endPointNotFound);
 app.use(errorHandler);
 
