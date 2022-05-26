@@ -1,22 +1,24 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const morgan = require("morgan");
 require("colors");
 
 const auth = require('./routes/auth');
+const { errorHandler,endPointNotFound} = require('./middlewares/errorHandler');
 
 const app = express();
 dotenv.config({path: "./config/config.env"});
 
+//? MORGAN MIDDLEWARE
+app.use(morgan("dev"));
 
 app.use(cors());
 app.use(express.json());
 
-// app.use((req,res,next) => {
-//     console.log('Rochdi maghadich ikml projet');
-//     next();
-// });
 app.use('/api/v1/auth',auth);
+app.use('*',endPointNotFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5050
 

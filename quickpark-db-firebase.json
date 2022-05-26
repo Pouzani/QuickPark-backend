@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "quickpark-db",
+  "private_key_id": "9f95e025eb18bffd95e8aaa7c33ebd869f53ca2a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwkDD84rQBMO5w\ngCIvAHx10/4V+rmcHgvxs2w+1j+dxM8hzFR8G+FwGcTaHRpHybea6rR81CXRjvct\nBscGtbw9+hgE538Kv7sCMGjpWIuFkvp1xqEXLzthuXMMAOETukMs/tEI+apOHAXr\nPz8GWMbEAU3V4mWEGOF+oS+5+eV7Lp8y/SQBrJjef2J0LGmZStGGGHxtBtbkiqTe\nnQeGonxiURLYa6Ss4SsVDZzR/k7RcICKtg4b8L1ITtF6gi0ag9uzTMlrw2UQzpz3\nM94a0Yj+81nIn1O3uy01VhgCiiDqjMP6c2HT5LAowtgflCuYj6qUTFioaiJCpZTl\nlErWjtppAgMBAAECggEAD1V0da/sFVrmKE3OejHC/Vor+8Vus3beD2+HR/VEKNvf\n58Xms/EZbOqGALHMl522hP0bb+heQPL3Nzk6lXP4zVKgHaPrsfepAnWJFPPgSRlU\nyF/320s6L2BjVBBq+7M+VITsS0jggCBZqL6xRug0me7pjzjWW2isQ7q0qgSAiCgl\nFRws0mtA/T60HIz9ORdA6I6RZGkATwgYzlNIjK8vHOEOqxSV71VqQ5qwoGQYB6Zv\nHOQ/cYPQ8D6RO1Hsx7wL8y0V9PFJdqVoeRjFKhMJcko7230RklWySNU75cGrry7O\nhNyekEviqakBB8Y/JPu951GznwDDlWdxdHR53TfnAQKBgQDur9/MJuRXOeiMQ+Mj\nR8OSLy49/Zh9ux8wKZfMRTpX0zbz0r2QOpLz4He98nwgC8NKsJYWGzBvni5k+Ykq\nzC1stecEcfpcOoWSYtO1QarV3bGt3+C256P7uljCqNy/1Nr/J3XqSIloGSoSm0Bj\nI2v5uyjs5IKsZYTI0rPjnvv/AQKBgQC9XsFAxsfECnfAeDDckhtn/Gn6p2OQ7YkJ\nVgQ4LnouwUdsawtQT4tDheLKQ4N9mkeb+NcSZieMNbpeduEWVjGzTr1DZEtaMdbE\nt3tGgGk6OA7eESCSnkx53b0fPeOJLaVSwF/D0fmSzTqztEXjbEoXLrdaFF1HAACD\nwMtOI3ZDaQKBgQDl+pveLxMQYIGKtNaj5b+wmLkrja9iZevVEh5q+cEPYjmukL2J\nvIZfaUa2xG+IyQywaJkUT7pJsdXuAOmDTRvvhQ1EoTWjq9eLhqGKIe2jB2rtp6rz\nURoVsCVZ2i5ov4ULGFBrHt0Waji5mNFfNIATLZxvNHYb+e0JOsuNZGBWAQKBgB4N\nyLvgEFozkxfPu2l2IrVZIPSv1iRtHl+F8Dt+XNPIxu4U+wGu7ho0SG7zUg4ACzdc\nwb1gywv8huxxD339BfxAFdd5NmBFIqGrwPvKa2ja9rkVnMbIKrj4kQhBSTg/L0q3\nzzsDuwkqWxOkG6dhS0zslBrOupMHFA3U7i8jf6RpAoGAf9M9jy5acgWQZiUfuVWu\npcbj22QbAAUd09IlHteencbunesURHEsSy6MhQolFbt+pD7kF6ubMXBgHEpF2ZWh\nmS7fRDSFUBpzuppB9wAtGRmBnef0C5EJCspHexqfFuCjr0r/yDKC2ygvzdyJDYcS\nt3oqnkPuMKiHx4M2EpO0UI8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-dkyo8@quickpark-db.iam.gserviceaccount.com",
+  "client_id": "112547698191172881912",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-dkyo8%40quickpark-db.iam.gserviceaccount.com"
+}

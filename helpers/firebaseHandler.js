@@ -1,16 +1,18 @@
 const firebase = require('firebase/app');
 const { getAuth} = require("firebase/auth");
+const { getFirestore, collection, addDoc} = require("firebase/firestore/lite");
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBpxANLyS-OWmv3bs1zC2dJhhyMTaqHZ40",
-  authDomain: "quickpark-4b23e.firebaseapp.com",
-  projectId: "quickpark-4b23e",
-  storageBucket: "quickpark-4b23e.appspot.com",
-  messagingSenderId: "164469478891",
-  appId: "1:164469478891:web:d579e75d5618fe2c4cf5ae",
-  measurementId: "G-N39HN37EF1"
+  apiKey: "AIzaSyARu_zNn42dIRB3uEbrhgPhTjAJnd5Zpr4",
+  authDomain: "quickpark-db.firebaseapp.com",
+  projectId: "quickpark-db",
+  storageBucket: "quickpark-db.appspot.com",
+  messagingSenderId: "330023300570",
+  appId: "1:330023300570:web:38f67eaf1bf33f4c86a4e3",
+  measurementId: "G-H5X0XF3Y8X"
   };
-firebase.initializeApp(firebaseConfig); //initialize firebase app 
+const app = firebase.initializeApp(firebaseConfig); //initialize firebase app 
 const auth = getAuth();
-module.exports = { firebase, auth};
+const db = getFirestore(app);
+module.exports = { firebase, auth,db,collection,addDoc};
