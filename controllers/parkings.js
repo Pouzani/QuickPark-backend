@@ -77,3 +77,14 @@ exports.updateParking = async(req,res,next)=>{
         next();
     }
 }
+
+exports.deleteParking = async(req,res,next)=>{
+    try {
+        let {parkingId} = req.params;
+        await deleteDoc(doc(db, "parkings", parkingId));
+        res.status(200).json({success:true,operation:"delete parking", data:{parkingId}});
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
