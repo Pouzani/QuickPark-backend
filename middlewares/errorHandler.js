@@ -7,7 +7,7 @@ const errorHandler = (req,res,next)=>{
     if(errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found'){
         errorMsg = "Email or password is incorrect !!";
     }
-    if(errorCode === 'auth/missing-data'){
+    if(errorCode === 'missing-data'){
         errorMsg = "Missing required values !!";
     }
     if(errorCode === 'auth/invalid-email'){

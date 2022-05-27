@@ -3,6 +3,7 @@ const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
 const { Parking } = require("../models/Parking");
 const { refEqual } = require("firebase/firestore/lite");
+const { async } = require("@firebase/util");
 
 
 exports.getParkings = async(req,res,next) =>{
@@ -32,12 +33,28 @@ exports.getParking = async(req,res,next) =>{
         let {parkingId} =  req.params;
         const docRef = doc(db, "parkings", parkingId);
         const docSnap = await getDoc(docRef);
-
         res.status(200).json({success:true,operation:"Get parking by id",count:(docSnap.data()?1:0),data:docSnap.data()})
         
     } catch (error) {
         req.quickpark = {errorCode:error.code};
         next();
     }
-    
+}
+
+exports.addParking = async(req,res,next)=>{
+    try{
+        let {parkingName,spotNumber,state} = req.body;
+
+        if(!parkingName || !spotNumber || !state ){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        const parkingsCol = collection(db,'parkings');
+        const newParking = new Parking(parkingName,spotNumber,state);
+        const newParkng = await addDoc(parkingsCol,newParking.data)
+        
+        res.status(200).json({success:true,operation:"Add new parking", data:{parkingId:newParkng.id}});
+    }catch(error){
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
 }

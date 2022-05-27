@@ -8,14 +8,14 @@ exports.register = async(req,res,next) =>{
     try {
         let {firstName, lastName, email, password} = req.body;
         if(!firstName || !lastName || !email ||!password ){
-            throw new CustomError("Missing data", "auth/missing-data"); 
+            throw new CustomError("Missing data", "missing-data"); 
         }
         const user = await createUserWithEmailAndPassword(auth,email,password);
         const usersCol = collection(db,'users');
         const newUser = new User(firstName,lastName,email);
         const newUsr = await addDoc(usersCol,newUser.data)
         
-        res.status(201).json({success:true,operation:"Register", data:newUsr});
+        res.status(201).json({success:true,operation:"Register", data:newUsr.id});
         
         
     } catch (error) {
@@ -30,7 +30,7 @@ exports.login = async(req,res,next)=>{
     try {
         let {email, password} = req.body;
         if(!email ||!password ){
-            throw new CustomError("Missing data", "auth/missing-data"); 
+            throw new CustomError("Missing data", "missing-data"); 
         }
         const {user} = await signInWithEmailAndPassword(auth,email,password);
         res.status(200).json({success:true,operation:"Login", data:user});
