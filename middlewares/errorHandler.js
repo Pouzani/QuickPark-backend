@@ -13,6 +13,9 @@ const errorHandler = (req,res,next)=>{
     if(errorCode === 'auth/invalid-email'){
         errorMsg = "Invalid email !!";
     }
+    if(errorCode === 'not-found'){
+        errorMsg = 'Doc not found';
+    }
     res.status(400).json({success:false,error:errorMsg});
 }
 

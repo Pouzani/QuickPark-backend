@@ -1,4 +1,4 @@
-const {db,collection,addDoc,query,getDoc,doc,getDocs} = require("../helpers/firebaseHandler");
+const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc} = require("../helpers/firebaseHandler");
 const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
 const { Parking } = require("../models/Parking");
@@ -54,6 +54,25 @@ exports.addParking = async(req,res,next)=>{
         
         res.status(200).json({success:true,operation:"Add new parking", data:{parkingId:newParkng.id}});
     }catch(error){
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
+
+exports.updateParking = async(req,res,next)=>{
+    try {
+        let {parkingName,spotNumber,state} = req.body;
+
+        if(!parkingName || !spotNumber || !state ){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        let {parkingId} =  req.params
+        const parkingRef = doc(db, "parkings", parkingId);
+
+        await updateDoc(parkingRef, req.body);
+        res.status(200).json({success:true,operation:"update parking", data:{parkingId}});
+
+    } catch (error) {
         req.quickpark = {errorCode:error.code};
         next();
     }
