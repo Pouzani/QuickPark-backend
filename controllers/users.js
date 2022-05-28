@@ -56,3 +56,33 @@ exports.addUser = async(req,res,next)=>{
         next();
     }
 }
+
+exports.updateUser = async(req,res,next)=>{
+    try {
+        let {firstName,lastName,email} = req.body;
+
+        if(!firstName || !lastName || !email ){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        let {userId} =  req.params
+        const userRef = doc(db, "users", userId);
+
+        await updateDoc(userRef, req.body);
+        res.status(200).json({success:true,operation:"update user", data:{userId}});
+
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
+
+exports.deleteUser = async(req,res,next)=>{
+    try {
+        let {userId} = req.params;
+        await deleteDoc(doc(db, "users", userId));
+        res.status(200).json({success:true,operation:"delete user", data:{userId}});
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
