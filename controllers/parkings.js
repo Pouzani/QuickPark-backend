@@ -20,7 +20,6 @@ exports.getParkings = async(req,res,next) =>{
         res.status(200).json({success:true,operation:"Get all parkings",count:parkings.length,data:parkings})
         
     } catch (error) {
-        console.log(error);
         req.quickpark = {errorCode:error.code};
         next();
         

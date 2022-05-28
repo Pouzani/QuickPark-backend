@@ -19,10 +19,22 @@ exports.getUsers = async(req,res,next) =>{
         res.status(200).json({success:true,operation:"Get all users",count:users.length,data:users})
         
     } catch (error) {
-        console.log(error);
         req.quickpark = {errorCode:error.code};
         next();
         
     }
     
+}
+
+exports.getUser = async(req,res,next) =>{
+    try {
+        let {userId} =  req.params;
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        res.status(200).json({success:true,operation:"Get user by id",count:(docSnap.data()?1:0),data:docSnap.data()})
+        
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
 }
