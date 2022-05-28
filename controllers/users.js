@@ -38,3 +38,21 @@ exports.getUser = async(req,res,next) =>{
         next();
     }
 }
+
+exports.addUser = async(req,res,next)=>{
+    try{
+        let {firstName,lastName,email} = req.body;
+        console.log(req.body);
+        if(!firstName || !lastName || !email ){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        const usersCol = collection(db,'users');
+        const newUser = new User(firstName,lastName,email);
+        const newUsr = await addDoc(usersCol,newUser.data)
+        
+        res.status(200).json({success:true,operation:"Add new user", data:{userId:newUsr.id}});
+    }catch(error){
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
