@@ -58,3 +58,35 @@ exports.getCar = async(req,res,next) =>{
         next();
     }
 }
+
+
+exports.updateCar = async(req,res,next)=>{
+    try {
+        let {carName,licensePlate} = req.body;
+        console.log(req.body);
+
+        if(!carName || !licensePlate){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        let {userId,carId} =  req.params
+        const carRef = doc(db, 'users', userId, 'cars',carId);
+
+        await updateDoc(carRef, req.body);
+        res.status(200).json({success:true,operation:"update car", data:{carId}});
+
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
+
+exports.deleteCar = async(req,res,next)=>{
+    try {
+        let {userId,carId} = req.params;
+        await deleteDoc(doc(db, 'users', userId, 'cars',carId));
+        res.status(200).json({success:true,operation:"delete car", data:{carId}});
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
