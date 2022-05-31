@@ -48,3 +48,18 @@ exports.getParkingSpots = async(req,res,next) =>{
     }
     
 }
+
+exports.getParkingSpot = async(req,res,next) =>{
+    try {
+        let {parkingId,parkingSpotId} =  req.params;
+        console.log(parkingSpotId);
+        const docRef = doc(db, 'parkings', parkingId,'parkingSpots',parkingSpotId);
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap.data());
+        res.status(200).json({success:true,operation:"Get parking spot by id",count:(docSnap.data()?1:0),data:docSnap.data()})
+        
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
