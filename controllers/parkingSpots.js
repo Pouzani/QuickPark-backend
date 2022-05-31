@@ -1,5 +1,4 @@
 const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc} = require("../helpers/firebaseHandler");
-const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
 const { ParkingSpot } = require("../models/ParkingSpot");
 
