@@ -1,9 +1,6 @@
 const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc} = require("../helpers/firebaseHandler");
 const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
-const { refEqual } = require("firebase/firestore/lite");
-const { async } = require("@firebase/util");
-
 
 exports.getUsers = async(req,res,next) =>{
     try {

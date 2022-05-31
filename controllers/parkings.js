@@ -2,9 +2,6 @@ const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc} = requ
 const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
 const { Parking } = require("../models/Parking");
-const { refEqual } = require("firebase/firestore/lite");
-const { async } = require("@firebase/util");
-
 
 exports.getParkings = async(req,res,next) =>{
     try {
@@ -44,7 +41,7 @@ exports.addParking = async(req,res,next)=>{
     try{
         let {parkingName,spotNumber,state} = req.body;
 
-        if(!parkingName || !spotNumber || !state ){
+        if(!parkingName || !spotNumber || state === '' ){
             throw new CustomError("Missing data", "missing-data"); 
         }
         const parkingsCol = collection(db,'parkings');
@@ -62,7 +59,7 @@ exports.updateParking = async(req,res,next)=>{
     try {
         let {parkingName,spotNumber,state} = req.body;
 
-        if(!parkingName || !spotNumber || !state ){
+        if(!parkingName || !spotNumber || state === '' ){
             throw new CustomError("Missing data", "missing-data"); 
         }
         let {parkingId} =  req.params
