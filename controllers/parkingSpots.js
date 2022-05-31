@@ -22,8 +22,29 @@ exports.addParkingSpot = async(req,res,next)=>{
         
         res.status(200).json({success:true,operation:"Add new parking spot", data:{parkingId:newParkingSpt.id}});
     }catch(error){
-        console.log(error);
         req.quickpark = {errorCode:error.code};
         next();
     }
+}
+
+exports.getParkingSpots = async(req,res,next) =>{
+    try {
+
+        let {parkingId} =  req.params
+        const queryToGetAllParkingSpots = query(collection(db, 'parkings',parkingId,'parkingSpots'));
+        const querySnapshot = await getDocs(queryToGetAllParkingSpots);
+        let parkingSpots = [];
+        querySnapshot.forEach((doc)=>{
+            let parkingSpot = new ParkingSpot(doc.data().column,doc.data().row,doc.data().shortestPath,doc.data().state);
+            parkingSpots.push(parkingSpot.data);
+        })
+
+        res.status(200).json({success:true,operation:"Get all parking spots",count:parkingSpots.length,data:parkingSpots})
+        
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+        
+    }
+    
 }

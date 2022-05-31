@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const {addParkingSpot} = require('../controllers/parkingSpots');
+const {addParkingSpot, getParkingSpots} = require('../controllers/parkingSpots');
 
-router.post("/:parkingId",addParkingSpot);
+router.get("/:parkingId", getParkingSpots).post("/:parkingId",addParkingSpot);
 
 module.exports = router;
