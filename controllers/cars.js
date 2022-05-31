@@ -24,3 +24,37 @@ exports.addCar = async(req,res,next)=>{
     }
 }
 
+exports.getCars = async(req,res,next) =>{
+    try {
+
+        let {userId} =  req.params
+        const queryToGetAllCars = query(collection(db, 'users',userId,'cars'));
+        const querySnapshot = await getDocs(queryToGetAllCars);
+        let cars = [];
+        querySnapshot.forEach((doc)=>{
+            let car = new Car(doc.data().carName,doc.data().licensePlate);
+            cars.push(car.data);
+        })
+
+        res.status(200).json({success:true,operation:"Get all cars",count:cars.length,data:cars})
+        
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+        
+    }
+    
+}
+
+exports.getCar = async(req,res,next) =>{
+    try {
+        let {userId,carId} =  req.params;
+        const docRef = doc(db, 'users', userId,'cars',carId);
+        const docSnap = await getDoc(docRef);
+        res.status(200).json({success:true,operation:"Get car by id",count:(docSnap.data()?1:0),data:docSnap.data()})
+        
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
