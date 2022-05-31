@@ -6,6 +6,7 @@ require("colors");
 
 const auth = require('./routes/auth');
 const parkings = require('./routes/parkings');
+const parkingSpots = require('./routes/parkingSpots');
 const users = require('./routes/users');
 const { errorHandler,endPointNotFound} = require('./middlewares/errorHandler');
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/parkings',parkings);
+app.use('/api/v1/parkingSpots',parkingSpots);
 app.use('/api/v1/users',users);
 app.use('*',endPointNotFound);
 app.use(errorHandler);
