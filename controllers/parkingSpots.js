@@ -17,7 +17,7 @@ exports.addParkingSpot = async(req,res,next)=>{
         const newParkingSpot = new ParkingSpot(column,row,shortestPath,state);
         const newParkingSpt = await addDoc(parkingSpotsCol,newParkingSpot.data)
         
-        res.status(200).json({success:true,operation:"Add new parking spot", data:{parkingId:newParkingSpt.id}});
+        res.status(200).json({success:true,operation:"Add new parking spot", data:{parkingSpotId:newParkingSpt.id}});
     }catch(error){
         req.quickpark = {errorCode:error.code};
         next();

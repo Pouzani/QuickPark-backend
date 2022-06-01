@@ -9,6 +9,8 @@ const parkings = require('./routes/parkings');
 const parkingSpots = require('./routes/parkingSpots');
 const users = require('./routes/users');
 const cars = require('./routes/cars');
+const tickets = require('./routes/tickets');
+
 const { errorHandler,endPointNotFound} = require('./middlewares/errorHandler');
 
 const app = express();
@@ -22,9 +24,10 @@ app.use(express.json());
 
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/parkings',parkings);
-app.use('/api/v1/parkingSpots',parkingSpots);
+app.use('/api/v1/parkingspots',parkingSpots);
 app.use('/api/v1/users',users);
 app.use('/api/v1/cars',cars);
+app.use('/api/v1/tickets',tickets);
 app.use('*',endPointNotFound);
 app.use(errorHandler);
 
