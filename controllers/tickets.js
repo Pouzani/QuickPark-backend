@@ -59,3 +59,36 @@ exports.getTicket = async(req,res,next) =>{
         next();
     }
 }
+
+exports.updateTicket = async(req,res,next)=>{
+    try {
+        let {arrivalTime,leavingTime,price,review,feedback,parkingId,userId,carId} = req.body;
+
+        if(!arrivalTime || !leavingTime || !price || review == null || !feedback || !parkingId){
+            throw new CustomError("Missing data", "missing-data"); 
+        }
+        let {ticketId} =  req.params
+        const ticketRef = doc(db, 'users', userId,'cars',carId,'tickets',ticketId);
+
+        const ticket = new Ticket(arrivalTime,leavingTime,price,review,feedback,parkingId);
+        await updateDoc(ticketRef, ticket.data);
+        res.status(200).json({success:true,operation:"update ticket", data:{ticketId}});
+
+    } catch (error) {
+        console.log(error);
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
+
+exports.deleteTicket = async(req,res,next)=>{
+    try {
+        let {userId, carId} = req.body;
+        let {ticketId} = req.params;
+        await deleteDoc(doc(db, 'users', userId,'cars',carId,'tickets',ticketId));
+        res.status(200).json({success:true,operation:"delete ticket", data:{ticketId}});
+    } catch (error) {
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
