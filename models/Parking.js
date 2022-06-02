@@ -1,12 +1,13 @@
 class Parking {
-    constructor(parkingName,spotNumer,state){
+    constructor(parkingName,spotNumber,state,parkingId){
         this.parkingName = parkingName;
-        this.spotNumer = spotNumer;
+        this.spotNumber = spotNumber;
         this.state = state;
+        this.parkingId = parkingId;
     }
 
     get data(){
-        return {parkingName: this.parkingName, spotNumer: this.spotNumer, state: this.state};
+        return {parkingName: this.parkingName, spotNumber: this.spotNumber, state: this.state,parkingId:this.parkingId};
     }
 }
 module.exports = {Parking};

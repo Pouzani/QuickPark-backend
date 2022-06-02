@@ -10,7 +10,7 @@ exports.getParkings = async(req,res,next) =>{
         const querySnapshot = await getDocs(queryToGetAllParkings);
         let parkings = [];
         querySnapshot.forEach((doc)=>{
-            let parking = new Parking(doc.data().parkingName,doc.data().spotNumber,doc.data().state);
+            let parking = new Parking(doc.data().parkingName,doc.data().spotNumber,doc.data().state,doc.id);
             parkings.push(parking.data);
         })
 

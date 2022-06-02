@@ -15,7 +15,7 @@ exports.register = async(req,res,next) =>{
         const newUser = new User(firstName,lastName,email);
         const newUsr = await addDoc(usersCol,newUser.data)
         
-        res.status(201).json({success:true,operation:"Register", data:newUsr.id});
+        res.status(201).json({success:true,operation:"Register", data:newUser.email});
         
         
     } catch (error) {
