@@ -32,7 +32,7 @@ exports.getTickets = async(req,res,next) =>{
         const querySnapshot = await getDocs(queryToGetAllTickets);
         let tickets = [];
         querySnapshot.forEach((doc)=>{
-            let ticket = new Ticket(doc.data().arrivalTime,doc.data().leavingTime,doc.data().price,doc.data().review,doc.data().review,doc.data().feedback,doc.data().parkingId);
+            let ticket = new Ticket(doc.data().arrivalTime,doc.data().leavingTime,doc.data().price,doc.data().review,doc.data().feedback,doc.data().parkingId);
             tickets.push(ticket.data);
         })
 
