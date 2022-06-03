@@ -34,8 +34,10 @@ exports.login = async(req,res,next)=>{
             throw new CustomError("Missing data", "missing-data"); 
         }
         await signInWithEmailAndPassword(auth,email,password);
-        const docRef = doc(db, "users", email);
+        const docRef = doc(db, "users", email.toLowerCase());
+        console.log(email);
         const docSnap = await getDoc(docRef);
+        console.log(docSnap.data());
         res.status(200).json({success:true,operation:"Login", data:docSnap.data()});
         
 
