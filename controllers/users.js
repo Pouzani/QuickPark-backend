@@ -1,6 +1,8 @@
-const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc} = require("../helpers/firebaseHandler");
+const {db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc,auth,updatePassword} = require("../helpers/firebaseHandler");
+const {signInWithEmailAndPassword} = require("firebase/auth")
 const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
+const { async } = require("@firebase/util");
 
 exports.getUsers = async(req,res,next) =>{
     try {
@@ -82,4 +84,21 @@ exports.deleteUser = async(req,res,next)=>{
         req.quickpark = {errorCode:error.code};
         next();
     }
+}
+
+exports.changePassword = async(req,res,next)=>{
+    try {
+
+        const {email,password,newPassword} = req.body;
+        await signInWithEmailAndPassword(auth,email,password);
+        const user = auth.currentUser;
+        await updatePassword(user, newPassword) ;
+        res.status(200).json({success:true,operation:"update user password", data:{user}});    
+        
+    } catch (error) {
+        console.log(error);
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+    
 }

@@ -10,11 +10,11 @@ exports.register = async(req,res,next) =>{
         if(!firstName || !lastName || !email ||!password ){
             throw new CustomError("Missing data", "missing-data"); 
         }
-        const user = await createUserWithEmailAndPassword(auth,email,password);
+        await (await createUserWithEmailAndPassword(auth,email,password));
         const usersCol = collection(db,'users');
         const newUser = new User(firstName,lastName,email);
-        const newUsr = await addDoc(usersCol,newUser.data)
-        
+        const newUsr = await addDoc(usersCol,newUser.data);
+
         res.status(201).json({success:true,operation:"Register", data:newUser.email});
         
         
@@ -33,6 +33,8 @@ exports.login = async(req,res,next)=>{
             throw new CustomError("Missing data", "missing-data"); 
         }
         const {user} = await signInWithEmailAndPassword(auth,email,password);
+        //const usr = await auth.currentUser.getIdToken(true);
+        //console.log(usr);
         res.status(200).json({success:true,operation:"Login", data:user});
         
 
