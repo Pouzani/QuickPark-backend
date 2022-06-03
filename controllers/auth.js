@@ -1,7 +1,8 @@
 const {createUserWithEmailAndPassword,signInWithEmailAndPassword} = require("firebase/auth")
-const {auth,db,collection,addDoc} = require("../helpers/firebaseHandler");
+const {auth,db,collection,addDoc,setDoc,getDoc,query,where,doc} = require("../helpers/firebaseHandler");
 const { User } = require("../models/User");
 const {CustomError} = require("../helpers/CustomError");
+const { use } = require("../routes/parkings");
 
 
 exports.register = async(req,res,next) =>{
@@ -10,15 +11,15 @@ exports.register = async(req,res,next) =>{
         if(!firstName || !lastName || !email ||!password ){
             throw new CustomError("Missing data", "missing-data"); 
         }
-        await (await createUserWithEmailAndPassword(auth,email,password));
-        const usersCol = collection(db,'users');
+        await createUserWithEmailAndPassword(auth,email,password);
         const newUser = new User(firstName,lastName,email);
-        const newUsr = await addDoc(usersCol,newUser.data);
+        await setDoc(doc(db, "users", email), newUser.data);
 
-        res.status(201).json({success:true,operation:"Register", data:newUser.email});
+        res.status(201).json({success:true,operation:"Register", data:newUser});
         
         
     } catch (error) {
+        console.log(error);
         req.quickpark = {errorCode:error.code};
         next();
         
@@ -32,10 +33,10 @@ exports.login = async(req,res,next)=>{
         if(!email ||!password ){
             throw new CustomError("Missing data", "missing-data"); 
         }
-        const {user} = await signInWithEmailAndPassword(auth,email,password);
-        //const usr = await auth.currentUser.getIdToken(true);
-        //console.log(usr);
-        res.status(200).json({success:true,operation:"Login", data:user});
+        await signInWithEmailAndPassword(auth,email,password);
+        const docRef = doc(db, "users", email);
+        const docSnap = await getDoc(docRef);
+        res.status(200).json({success:true,operation:"Login", data:docSnap.data()});
         
 
     } catch (error) {

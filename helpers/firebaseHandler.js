@@ -1,6 +1,6 @@
 const firebase = require('firebase/app');
 const { getAuth,updatePassword} = require("firebase/auth");
-const { getFirestore, collection, addDoc, query,getDoc,doc,getDocs,updateDoc,deleteDoc} = require("firebase/firestore/lite");
+const { getFirestore, collection, addDoc, query,getDoc,doc,getDocs,updateDoc,deleteDoc,where,setDoc} = require("firebase/firestore/lite");
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -15,4 +15,4 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig); //initialize firebase app 
 const auth = getAuth();
 const db = getFirestore(app);
-module.exports = { firebase, auth,db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc,updatePassword};
+module.exports = { firebase, auth,db,collection,addDoc,query,getDoc,doc,getDocs,updateDoc,deleteDoc,updatePassword,where,setDoc};
