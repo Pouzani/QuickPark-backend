@@ -12,7 +12,7 @@ exports.register = async(req,res,next) =>{
             throw new CustomError("Missing data", "missing-data"); 
         }
         await createUserWithEmailAndPassword(auth,email,password);
-        const newUser = new User(firstName,lastName,email);
+        const newUser = new User(firstName,lastName,email,[]);
         await setDoc(doc(db, "users", email), newUser.data);
 
         res.status(201).json({success:true,operation:"Register", data:newUser});

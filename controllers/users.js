@@ -102,3 +102,26 @@ exports.changePassword = async(req,res,next)=>{
     }
     
 }
+
+exports.setToFavoriteParkings = async(req,res,body)=>{
+    try {
+        const {parkingId,userId} = req.body;
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        let favoriteParkings = docSnap.data().favoriteParkings;
+        let index = favoriteParkings.indexOf(parkingId);
+        if(index == -1){
+            favoriteParkings.push(parkingId);
+        }else{
+            favoriteParkings.splice(index,1);
+        }
+
+        await updateDoc(docRef, {favoriteParkings});
+
+        res.status(200).json({success:true,operation:"set favorite",data:favoriteParkings})
+
+
+    } catch (error) {
+        
+    }
+}
