@@ -118,10 +118,34 @@ exports.setToFavoriteParkings = async(req,res,body)=>{
 
         await updateDoc(docRef, {favoriteParkings});
 
-        res.status(200).json({success:true,operation:"set favorite",data:favoriteParkings})
+        res.status(200).json({success:true,operation:"set favorite",data:favoriteParkings});
 
 
     } catch (error) {
-        
+        console.log(error);
+        req.quickpark = {errorCode:error.code};
+        next();
+    }
+}
+exports.getFavoriteParkings = async(req,res,body)=>{
+    try {
+        const {userId} = req.params;
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        let favoriteParkings = [];
+        let favoriteParkingsId = docSnap.data().favoriteParkings;
+
+        for(let favoriteParkingId of favoriteParkingsId ){
+            const parkingRef = doc(db,"parkings",favoriteParkingId)
+            const parkingSnap = await getDoc(parkingRef);
+            favoriteParkings.push(parkingSnap.data());
+        }
+
+        res.status(200).json({success:true,operation:"get favorite parkings",data:favoriteParkings})
+            
+    }catch (error) {
+        console.log(error);
+        req.quickpark = {errorCode:error.code};
+        next();
     }
 }
