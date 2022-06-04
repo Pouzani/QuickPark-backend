@@ -7,7 +7,7 @@ exports.addTicket = async(req,res,next)=>{
 
         let {arrivalTime,leavingTime,price,review,feedback,parkingId} = req.body;
 
-        if(!arrivalTime || !leavingTime || !price || !review || !feedback || !parkingId){
+        if(!arrivalTime || !price || !review || !feedback || !parkingId){
             throw new CustomError("Missing data", "missing-data"); 
         }
         
