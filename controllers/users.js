@@ -134,7 +134,9 @@ exports.getFavoriteParkings = async(req,res,body)=>{
         const docSnap = await getDoc(docRef);
         let favoriteParkings = [];
         let favoriteParkingsId = docSnap.data().favoriteParkings;
-
+        if(!favoriteParkingsId){
+            throw new CustomError("Not found", "not-found");
+        }
         for(let favoriteParkingId of favoriteParkingsId ){
             const parkingRef = doc(db,"parkings",favoriteParkingId)
             const parkingSnap = await getDoc(parkingRef);
