@@ -47,11 +47,12 @@ exports.addParking = async(req,res,next)=>{
             throw new CustomError("Missing data", "missing-data"); 
         }
         const parkingsCol = collection(db,'parkings');
-        const newParking = new Parking(parkingName,spotNumber,state);
-        const newParkng = await addDoc(parkingsCol,newParking.data)
+        //const newParking = new Parking(parkingName,spotNumber,state);
+        const newParkng = await addDoc(parkingsCol,req.body)
         
         res.status(200).json({success:true,operation:"Add new parking", data:{parkingId:newParkng.id}});
     }catch(error){
+        console.log(error);
         req.quickpark = {errorCode:error.code};
         next();
     }
