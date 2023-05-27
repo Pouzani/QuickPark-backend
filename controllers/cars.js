@@ -138,17 +138,17 @@ exports.accessCarControl = async (req, res, next) => {
       collection(db, "users", userId, "cars", carId, "tickets")
     );
     const querySnapshotTickets = await getDocs(queryToGetAllTickets);
-    for (let ticket of querySnapshotTickets.docs) {
-      if (
-        ticket.data().parkingId === parkingId
-      ) {
-        desiredTicket = ticket.data();
-        break;
-      }
-    }
-    if (!desiredTicket) {
+//     for (let ticket of querySnapshotTickets.docs) {
+//       if (
+//         ticket.data().parkingId === parkingId
+//       ) {
+//         desiredTicket = ticket.data();
+//         break;
+//       }
+//     }
+    /*if (!desiredTicket) {
       throw new CustomError("Not found", "not-found");
-    }
+    }*/
 
     res.status(200).json({
       success: true,
