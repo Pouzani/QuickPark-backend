@@ -13,7 +13,7 @@ class Parking {
       spotNumber: this.spotNumber,
       state: this.state,
       parkingId: this.parkingId,
-      localtisation: this.localisation,
+      localisation: this.localisation,
     };
   }
 }
